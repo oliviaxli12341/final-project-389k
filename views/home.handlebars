@@ -1,4 +1,4 @@
-<input id="search" type="text" placeholder="Search for a song by title!">
+<input id="search" type="text" placeholder="Search for something!">
 
 
 <div id="search_results"></div>
@@ -6,12 +6,13 @@
 <div id="all">
 {{#each data}}
 <article>
-<h1 class="name">{{this.name}}</h1><h2>by</h2><h1 class="artists">{{this.artists}}</h1>
-<p><span class="genre">Genre: {{this.genre}}</span> <span class="rating">Rating: {{this.rating}}</span></p>
+<!--<h1 class="name">{{this.name}}</h1><h2>by</h2><h1 class="artists">{{this.artists}}</h1>
+<p><span class="genre">Genre: {{this.genre}}</span> <span class="rating">Rating: {{this.rating}}</span></p>-->
+<p>We got data, but this isnt implemented yet!</p>
 </article>
 {{else}}
 <article>
-  <h1>There are no songs posted yet.</h1>
+  <h1>There was no data from the server.</h1>
 </article>
 {{/each}}
 </div>
@@ -19,7 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js">
 </script>
 <script>
-$("#search").on("keyup", function(){
+/*$("#search").on("keyup", function(){
 
   var title = $("#search").val();
   if (title == "") {
@@ -41,6 +42,6 @@ $("#search").on("keyup", function(){
     }
     }
   });
-});
+});*/
 
 </script>
