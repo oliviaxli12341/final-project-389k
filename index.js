@@ -3,16 +3,31 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
 var fs = require('fs');
-//var dataUtil = require("./data-util");
-//var _ = require("underscore");
-//var moment = require('moment');
-//var marked = require('marked');
+var moment = require('moment');
+var mongoose = require('mongoose');
+var dotenv = require('dotenv').config();
+var TestModel = require('./models/TestModel');
 
+//Load Environment Variables
+if (dotenv.error) {
+  throw dotenv.error
+}
+console.log("##dotenv loaded")
+console.log(dotenv.parsed);
+
+
+//Connect to MongoDB
+console.log("##attempting to connect to MongoDB")
+console.log(process.env.MONGODB);
+mongoose.connect(process.env.MONGODB,{useNewUrlParser: true}).catch(function(reason) {
+  console.log("!!Unable to connect to MongoDB. Error: ", reason);
+});
+console.log("##Successfully connected to MongoDB!");
+
+
+//Setup Express App
 var app = express();
 var PORT = 3000;
-
-//var _DATA = dataUtil.loadData().songs;
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +41,32 @@ app.use('/public', express.static('public'));
  });
 
 app.get('/',function(req,res){
-  res.render('home',{data:{}});
+  TestModel.find({}, function(err, testPosts) {
+    if (err) throw err;
+    res.render('home',{data:testPosts});
+  });
+});
+
+app.get("/test/create",function(req,res){
+  res.render("create");
+});
+
+app.post("/test/create",function(req,res){
+  var test = new TestModel({
+    text: req.body.text,
+    time: moment()
+  });
+  test.save(function(err) {
+    if (err) throw err;
+    return res.send("successfully sumbitted data to server!");
+  });
+});
+
+app.get('/test',function(req,res) {
+  TestModel.find({}, function(err, testPosts) {
+    if (err) throw err;
+    res.send(testPosts);
+  });
 });
 
 /*app.get('/rating',function(req,res){
@@ -86,21 +126,13 @@ app.get('/',function(req,res){
   res.json(arr);
 });*/
 
-/*app.get("/create",function(req,res){
-  res.render("create");
-});*/
+
 
 /*app.post("/api/create",function(req,res){
   _DATA.push(req.body);
   dataUtil.saveData(_DATA);
 });*/
 
-/*app.post("/create",function(req,res){
-  var body = req.body;
-  body.artists.split(",");
-  _DATA.push(body);
-  dataUtil.saveData(_DATA);
-  res.redirect("/");
-});*/
+
 
 module.exports = app
