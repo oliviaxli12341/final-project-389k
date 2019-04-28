@@ -1,0 +1,28 @@
+<h1>Add a song review!</h1>
+<article>
+  <form method="POST" action="/create">
+    <table>
+      <tr>
+        <td><label>Song Name:</label></td>
+        <td><input type="text" name="name" size="50" placeholder="Song Name..."></td>
+      </tr>
+      <tr>
+        <td><label>Song Year:</label></td>
+        <td><input type="text" name="year" size="50" placeholder="Song Year..."></td>
+      </tr>
+      <tr>
+        <td><label>Artists:</label></td>
+        <td><input type="text" name="artists" size="50" placeholder="Artists (seperated by commas)"></td>
+      </tr>
+      <tr>
+        <td><label>Song Genre:</label></td>
+        <td><input type="text" name="genre" size="50" placeholder="Song Genre..."></td>
+      </tr>
+      <tr>
+        <td><label>Rating out of 10:</label></td>
+        <td><input type="text" name="rating" size="50" placeholder="Your Rating..."></td>
+      </tr>
+  </table>
+    <button type="submit">Submit & Add Review</button>
+  </form>
+</article>

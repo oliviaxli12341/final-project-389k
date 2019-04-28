@@ -1,0 +1,46 @@
+<input id="search" type="text" placeholder="Search for a song by title!">
+
+
+<div id="search_results"></div>
+
+<div id="all">
+{{#each data}}
+<article>
+<h1 class="name">{{this.name}}</h1><h2>by</h2><h1 class="artists">{{this.artists}}</h1>
+<p><span class="genre">Genre: {{this.genre}}</span> <span class="rating">Rating: {{this.rating}}</span></p>
+</article>
+{{else}}
+<article>
+  <h1>There are no songs posted yet.</h1>
+</article>
+{{/each}}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js">
+</script>
+<script>
+$("#search").on("keyup", function(){
+
+  var title = $("#search").val();
+  if (title == "") {
+    $("#search_results").empty();
+    $("#all").css("display","block");
+    $("#search_results").text("");
+  }
+  $.get("/api/name/" + title +" ", function(data){
+    //console.log(data);
+    $("#search_results").empty();
+    if (data.length == 0) {
+      $("#search_results").text("No results");
+      $("#all").css("display","none");
+    } else {
+    //console.log("in");
+    $("#all").css("display","none");
+    for (var i = 0; i < data.length;i++) {
+      $("#search_results").append("<article><h1 class='name'>"+data[i].name+"</h1><h2>by</h2><h1 class='artists'>"+data[i].artists+"</h1><p><span class='genre'>Genre: "+data[i].genre+"</span> <span class='rating'>Rating: "+data[i].rating+"</span></p></article>");
+    }
+    }
+  });
+});
+
+</script>
