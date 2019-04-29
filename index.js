@@ -43,7 +43,7 @@ app.use('/public', express.static('public'));
 app.get('/',function(req,res){
   TestModel.find({}, function(err, testPosts) {
     if (err) throw err;
-    res.render('home',{data:testPosts});
+    res.render('home',{data:testPosts.reverse()});
   });
 });
 

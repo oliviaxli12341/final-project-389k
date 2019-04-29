@@ -9,7 +9,7 @@
 <!--<h1 class="name">{{this.name}}</h1><h2>by</h2><h1 class="artists">{{this.artists}}</h1>
 <p><span class="genre">Genre: {{this.genre}}</span> <span class="rating">Rating: {{this.rating}}</span></p>-->
 <p>{{this.text}}</p>
-<p class=>posted at {{this.time}} utc time</p>
+<p class="timestamp">Posted <script>document.write(new Date({{this.time}}))</script></p>
 </article>
 {{else}}
 <article>
