@@ -1,0 +1,16 @@
+<h1>Edit User {{name}}</h1>
+<article>
+  <form method="POST" action="/user/{{name}}/edit">
+    <table>
+      <tr>
+        <td><label>Description:</label></td>
+        <td><input type="text" name="desc" size="50" placeholder="Type something..."></td>
+      </tr>
+      <tr>
+        <td><label>Picture:</label></td>
+        <td><input type="text" name="picture" size="50" placeholder="Image url"></td>
+      </tr>
+  </table>
+    <button type="submit">Submit</button>
+  </form>
+</article>

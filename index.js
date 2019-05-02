@@ -146,10 +146,58 @@ app.post("/post/:id/comment",function(req,res){
   }
 });
 
+app.get('/user/:name',function(req,res){
+  User.find({user:req.params.name}, function(err, users) {
+    if (err) throw err;
+    if (Object.keys(users).length === 0) {
+      res.send("No user profile created yet.");
+    } else {
+      res.render('user',{data: users});
+    }
+  });
+});
+
+app.get('/user/:name/edit',function(req,res){
+  User.find({user:req.params.name}, function(err, users) {
+    if (err) throw err;
+    res.render('userEdit',{name: req.params.name});
+  });
+});
+
+app.post("/user/:name/edit",function(req,res){
+  console.log("test");
+    User.find({user:req.params.name}, function(err, users) {
+      if (err) throw err;
+      console.log(users[0]);
+      if (users[0] === undefined) {
+        users[0] = new User({
+          user: req.params.name,
+          description: req.body.desc,
+          picture: req.body.picture
+        });
+      } else {
+        users[0].description = req.body.desc;
+        users[0].picture = req.body.picture;
+      }
+      console.log(users[0]);
+      users[0].save(function(err) {
+      if (err) throw err;
+        return res.send("Successfully edited user " + req.params.name);
+      });
+    });
+});
+
 app.get('/api/posts', function(req,res) {
   Post.find({}, function(err, posts) {
     if (err) throw err;
     res.send(posts);
+  });
+});
+
+app.get('/api/users', function(req,res) {
+  User.find({}, function(err, users) {
+    if (err) throw err;
+    res.send(users);
   });
 });
 

@@ -31,6 +31,17 @@ UserSchema:
 }
 
 ## 2. Live Updates:
+
+Current working links:
+home page:                  /
+create a new post:          /create
+show a specific post:       /post/:id
+comment on a specific post: /post/:id/comment
+show a specific user:       /user/:name
+edit or create a user:      /user/:name/edit
+show all posts:             /api/posts
+show all users:             /api/users
+
   #TODO add live updates with web sockets
 
 ## 3. View Data:
