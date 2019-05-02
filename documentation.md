@@ -32,6 +32,10 @@ UserSchema:
 
 ## 2. Live Updates:
 
+  #TODO add live updates with web sockets
+
+## 3. View Data:
+
 Current working links:
 home page:                  /
 create a new post:          /create
@@ -42,9 +46,6 @@ edit or create a user:      /user/:name/edit
 show all posts:             /api/posts
 show all users:             /api/users
 
-  #TODO add live updates with web sockets
-
-## 3. View Data:
   a. HTML pages are generated using handlebars
   b. (2/5), we currently have a home page and a form submission page.
   c. #TODO add about page
