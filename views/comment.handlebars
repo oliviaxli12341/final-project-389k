@@ -1,6 +1,6 @@
-<h1>Add something</h1>
+<h1>Comment on post #{{id}}</h1>
 <article>
-  <form method="POST" action="/create">
+  <form method="POST" action="/post/{{id}}/comment">
     <table>
       <tr>
         <td><label>Text:</label></td>
@@ -9,10 +9,6 @@
       <tr>
         <td><label>Username: (optional)</label></td>
         <td><input type="text" name="user" size="50" placeholder="Leave blank for anonymous"></td>
-      </tr>
-      <tr>
-        <td><label>Tags: (optional)</label></td>
-        <td><input type="text" name="tags" size="50" placeholder="seperate tags by comma"></td>
       </tr>
   </table>
     <button type="submit">Submit</button>

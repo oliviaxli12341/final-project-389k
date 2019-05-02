@@ -6,8 +6,17 @@
 <div id="all">
 {{#each data}}
 <article>
-  <p>{{this.text}}</p>
-  <p class="timestamp">Posted <script>document.write(new Date({{this.time}}))</script></p>
+  <p class="post">{{this.text}}</p>
+  <p class="tags">&emsp;Tags: {{#each this.tags}}{{this}} {{/each}}<p>
+  <p class="timestamp">Post #{{this.id}}&emsp;Posted by {{this.user}} on <script>document.write(new Date({{this.time}}))</script></p>
+  <p>Comments:</p>
+  <ul>
+    {{#each this.comments}}
+    <li class="post">{{this.text}}<span class="timestamp">&emsp;Posted by {{this.user}} on <script>document.write(new Date({{this.time}}))</script></span></li>
+    {{else}}
+    <li>No comments yet...</li>
+    {{/each}}
+  </ul>
 </article>
 {{else}}
 <article>

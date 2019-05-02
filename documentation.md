@@ -1,29 +1,58 @@
-1. Database:
-  Data is stored using MongoDB via the mongoose npm package
+## 1. Database:
+  Data is stored using MongoDB via the mongoose npm package.
 
-2. Live Updates:
+  Schemas:
+
+  postSchema:
+
+  {
+    text: String,
+    id: Number,
+    time: Number,
+    user: String,
+    tags: [String],
+    comments: [commentSchema]
+  }
+
+commentSchema:
+
+{
+  text: String,
+  time: Number,
+  user: String
+}
+
+UserSchema:
+
+{
+  user: String,
+  description: String,
+  picture: String
+}
+
+## 2. Live Updates:
   #TODO add live updates with web sockets
 
-3. View Data:
+## 3. View Data:
   a. HTML pages are generated using handlebars
   b. (2/5), we currently have a home page and a form submission page.
   c. #TODO add about page
 
-4. API:
+## 4. API:
  a. #TODO add API endpoints
  b. #TODO add delete endpoints
 
-5. Modules:
+## 5. Modules:
   #TODO create 2 modules
 
-6. NPM Packages:
+## 6. NPM Packages:
   #TODO find and use 2 packages
 
-7. User Interface
+## 7. User Interface
   Pages are styled using css
 
-8. Deployment
+## 8. Deployment
   #TODO put website on heroku
 
-9. README
+## 9. README
   #TODO complete documentation file.

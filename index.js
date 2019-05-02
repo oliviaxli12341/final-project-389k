@@ -6,7 +6,8 @@ var fs = require('fs');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv').config();
-var TestModel = require('./models/TestModel');
+var Post = require('./models/Post');
+var User = require('./models/User');
 
 //Load Environment Variables
 if (dotenv.error) {
@@ -40,34 +41,116 @@ app.use('/public', express.static('public'));
      console.log('Listening on port 3000!');
  });
 
+
 app.get('/',function(req,res){
-  TestModel.find({}, function(err, testPosts) {
+  Post.find({}, function(err, posts) {
     if (err) throw err;
-    res.render('home',{data:testPosts.reverse()});
+    res.render('home',{data: posts.reverse()});
   });
 });
 
-app.get("/test/create",function(req,res){
+app.get("/create",function(req,res){
   res.render("create");
 });
 
-app.post("/test/create",function(req,res){
-  var test = new TestModel({
-    text: req.body.text,
-    time: moment()
-  });
-  test.save(function(err) {
+app.post("/create",function(req,res){
+  Post.find({}, function(err, allPosts) {
     if (err) throw err;
-    return res.send("successfully sumbitted data to server!");
+
+    var idVal;
+    if (allPosts == null || allPosts == {}) {
+      idVal = 0;
+    } else {
+      idVal = allPosts.length;
+    }
+
+    var userVal;
+    if (req.body.user == "") {
+      userVal = "anonymous";
+    } else {
+      userVal = req.body.user;
+    }
+
+    var post = new Post({
+      text: req.body.text,
+      id: idVal,
+      time: moment(),
+      user: userVal.toLowerCase(),
+      tags: req.body.tags.split(",").map(x => x.trim().toLowerCase()),
+      comments: []
+    });
+    post.save(function(err) {
+      if (err) throw err;
+      return res.send("Successfully submitted data to the server!");
+    })
   });
 });
 
-app.get('/test',function(req,res) {
-  TestModel.find({}, function(err, testPosts) {
-    if (err) throw err;
-    res.send(testPosts);
-  });
+app.get('/post/:id',function(req,res){
+  if (isNaN(req.params.id)) {
+    res.send("No posts with that id.");
+  } else {
+    Post.find({id:parseInt(req.params.id)}, function(err, posts) {
+      if (err) throw err;
+      if (Object.keys(posts).length === 0) {
+        res.send("No post with that id.");
+      } else {
+        res.render('home',{data: posts.reverse()});
+      }
+    });
+  }
 });
 
+app.get('/post/:id/comment',function(req,res){
+  if (isNaN(req.params.id)) {
+    res.send("No posts with that id.");
+  } else {
+    Post.find({id:parseInt(req.params.id)}, function(err, posts) {
+      if (err) throw err;
+      if (Object.keys(posts).length === 0) {
+        res.send("No post with that id.");
+      } else {
+        res.render('comment',{id:req.params.id});
+      }
+    });
+  }
+});
+
+app.post("/post/:id/comment",function(req,res){
+  if (isNaN(req.params.id)) {
+    res.send("No posts with that id.");
+  } else {
+    Post.find({id:parseInt(req.params.id)}, function(err, posts) {
+      if (err) throw err;
+      if (Object.keys(posts).length === 0) {
+        res.send("No post with that id.");
+      } else {
+        var userVal;
+        if (req.body.user == "") {
+          userVal = "anonymous";
+        } else {
+          userVal = req.body.user;
+        }
+
+        posts[0].comments.push({
+          text: req.body.text,
+          time: moment(),
+          user: userVal.toLowerCase(),
+        });
+        posts[0].save(function(err) {
+          if (err) throw err;
+          return res.send("Sucessfully added a comment to post #" + req.params.id);
+        });
+      }
+    });
+  }
+});
+
+app.get('/api/posts', function(req,res) {
+  Post.find({}, function(err, posts) {
+    if (err) throw err;
+    res.send(posts);
+  });
+});
 
 module.exports = app
