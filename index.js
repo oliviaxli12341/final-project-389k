@@ -10,9 +10,9 @@ var Post = require('./models/Post');
 var User = require('./models/User');
 
 //Load Environment Variables
-if (dotenv.error) {
+/*if (dotenv.error) {
   throw dotenv.error
-}
+}*/
 console.log("##dotenv loaded")
 console.log(dotenv.parsed);
 
