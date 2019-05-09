@@ -38,22 +38,28 @@ UserSchema:
 
 ## 3. View Data:
 
-Description | URL
------ | -----
-home page |     /
-create a new post |     /create
-show a specific post |     /post/:id
-comment on a specific post |    /post/:id/comment
-show a specific user |     /user/:name
-edit or create a user |     /user/:name/edit
-show all posts |     /api/posts
-show all users |     /api/users
+URL | Description | Example
+----- | ----- | -----
+/ | home page | https://final-project-389k.herokuapp.com/
+/create | create a new post | https://final-project-389k.herokuapp.com/create/
+/post/:id | show a specific post | https://final-project-389k.herokuapp.com/post/0/
+/post/:id/comment | comment on a specific post | https://final-project-389k.herokuapp.com/post/0/comment/
+/user/:name | show a specific user | https://final-project-389k.herokuapp.com/user/matt/
+/user/:name/edit | edit or create a user | https://final-project-389k.herokuapp.com/user/matt/edit/
+/api/posts | show all posts | https://final-project-389k.herokuapp.com/api/posts
+/api/users | show all users | https://final-project-389k.herokuapp.com/users
 
-  * HTML pages are generated using handlebars
-  * (2/5), we currently have a home page and a form submission page.
+  * HTML pages are generated using Handlebars.
+  * The following five pages are generated using Handlebars:
+    * Home page
+    * Post Creation Page
+    * Post Comment Page
+    * User Page
+    * User Creation Page
   * #TODO add about page
 
 ## 4. API:
+
 
   * #TODO add API endpoints
   * #TODO add delete endpoints
@@ -68,7 +74,7 @@ show all users |     /api/users
 
 ## 7. User Interface
 
-  * Pages are styled using css
+  * Pages are styled using custom CSS.
 
 ## 8. Deployment
 
