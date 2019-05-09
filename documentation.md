@@ -1,3 +1,12 @@
+# Final Project - Social Media Website
+## Created by Matthew McGowan, Kemi Lin, and Xiaoyu Li
+
+https://github.com/MisterMista
+
+https://github.com/imseul
+
+https://github.com/oliviaxli12341
+
 #### Heroku link: https://final-project-389k.herokuapp.com/
 
 ## 1. Database:
@@ -44,10 +53,10 @@ URL | Description | Example
 /create | create a new post | https://final-project-389k.herokuapp.com/create/
 /post/:id | show a specific post | https://final-project-389k.herokuapp.com/post/0/
 /post/:id/comment | comment on a specific post | https://final-project-389k.herokuapp.com/post/0/comment/
-/user/:name | show a specific user | https://final-project-389k.herokuapp.com/user/matt/
-/user/:name/edit | edit or create a user | https://final-project-389k.herokuapp.com/user/matt/edit/
-/api/posts | show all posts | https://final-project-389k.herokuapp.com/api/posts
-/api/users | show all users | https://final-project-389k.herokuapp.com/users
+/user/:name | show a specific user | https://final-project-389k.herokuapp.com/user/matthew/
+/user/:name/edit | edit or create a user | https://final-project-389k.herokuapp.com/user/exampleuser/edit/
+/api/posts | show all posts | https://final-project-389k.herokuapp.com/api/posts/
+/api/users | show all users | https://final-project-389k.herokuapp.com/api/users/
 
   * HTML pages are generated using Handlebars.
   * The following five pages are generated using Handlebars:
