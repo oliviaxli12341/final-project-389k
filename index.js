@@ -201,4 +201,48 @@ app.get('/api/users', function(req,res) {
   });
 });
 
+app.get('/random', function (req,res) {
+  var count = 0;
+  Post.find({}, function (err, results) {
+    count = results.length;
+    var random_num = Math.floor(Math.random() * count - 1) + 1;
+  console.log(random_num);
+  Post.find({id:random_num}, function (err, result) {
+    res.render('home', {data: result});
+  });
+  });
+});
+
+app.get('/most', function (req, res) {
+  var max = 0, item;
+  Post.find({}, function (err, results) {
+
+    for (var i of results) {
+      if (i.comments.length > max) {
+        max = i.comments.length;
+        item = i.id;
+      }
+    }
+  Post.find({id: item}, function (err, result) {
+    res.render('home', {data: result});
+  })
+    
+  })
+})
+
+app.get('/least', function (req, res) {
+  var min = 1000000000000000000000, item;
+  Post.find({}, function(err, results) {
+    for (var i of results) {{
+      if (i.comments.length < min) {
+        min = i.comments.length;
+        item = i.id;
+      }
+    }}
+    Post.find({id: item}, function (err, result) {
+    res.render('home', {data: result});
+  })
+  })
+
+})
 module.exports = app

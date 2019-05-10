@@ -11,6 +11,9 @@ body {
   font-family: Helvetica, sans-serif;
   color: #454545;
 }
+input {
+  text-align: center;
+}
 #page {
     margin: 16px 64px;
 }
