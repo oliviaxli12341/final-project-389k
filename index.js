@@ -81,7 +81,8 @@ app.post("/create",function(req,res){
     });
     post.save(function(err) {
       if (err) throw err;
-      return res.send("Successfully submitted data to the server!");
+      res.redirect("/");
+      //return res.send("Successfully submitted data to the server!");
     })
   });
 });
@@ -182,7 +183,8 @@ app.post("/user/:name/edit",function(req,res){
       console.log(users[0]);
       users[0].save(function(err) {
       if (err) throw err;
-        return res.send("Successfully edited user " + req.params.name);
+        //return res.send("Successfully edited user " + req.params.name);
+        res.redirect("/user/"+req.params.name);
       });
     });
 });
