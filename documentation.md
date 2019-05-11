@@ -49,41 +49,53 @@ UserSchema:
 
 URL | Description | Example
 ----- | ----- | -----
-/ | home page | https://final-project-389k.herokuapp.com/
-/create | create a new post | https://final-project-389k.herokuapp.com/create/
-/post/:id | show a specific post | https://final-project-389k.herokuapp.com/post/0/
-/post/:id/comment | comment on a specific post | https://final-project-389k.herokuapp.com/post/0/comment/
-/user/:name | show a specific user | https://final-project-389k.herokuapp.com/user/matthew/
-/user/:name/edit | edit or create a user | https://final-project-389k.herokuapp.com/user/exampleuser/edit/
-/api/posts | show all posts | https://final-project-389k.herokuapp.com/api/posts/
-/api/users | show all users | https://final-project-389k.herokuapp.com/api/users/
+/ | Home page | https://final-project-389k.herokuapp.com/
+/create | Create a new post | https://final-project-389k.herokuapp.com/create/
+/post/:id | Show a specific post | https://final-project-389k.herokuapp.com/post/0/
+/post/:id/comment | Comment on a specific post | https://final-project-389k.herokuapp.com/post/0/comment/
+/users/ | Show all users | https://final-project-389k.herokuapp.com/users/
+/user/:name | Show a specific user | https://final-project-389k.herokuapp.com/user/matthew/
+/user/:name/edit | Edit or create a user | https://final-project-389k.herokuapp.com/user/exampleuser/edit/
+/api/posts | Show all posts | https://final-project-389k.herokuapp.com/api/posts/
+/api/users | Show all users | https://final-project-389k.herokuapp.com/api/users/
+/random | Show a random post | https://final-project-389k.herokuapp.com/random/
+/most | Show post with most comments | https://final-project-389k.herokuapp.com/most/
+/least | Show post with least comments | https://final-project-389k.herokuapp.com/least/
+/aboutUs | Show about page | https://final-project-389k.herokuapp.com/aboutUs/
 
   * HTML pages are generated using Handlebars.
-  * The following five pages are generated using Handlebars:
+  * The following pages are generated using Handlebars:
     * Home page
     * Post Creation Page
     * Post Comment Page
     * User Page
     * User Creation Page
-  * #TODO add about page
+    * All Users Page
+    * About Page
 
 ## 4. API:
 
-
-  * #TODO add API endpoints
-  * #TODO add delete endpoints
+  * Post Endpoints:
+    * /user/:name/edit
+    * /post/:id/comments
+  * Delete Endpoints:
+    * /post/:id/delete  (deletes a specific post according to id - the post number)
+    * /user/post/:name/delete  (deletes posts associated with a user, doesn't delete the user)
+    * /user/:name/delete  (deletes the user)
 
 ## 5. Modules:
 
-  * #TODO create 2 modules
+  * post_utils.js
+  * user_utils.js
 
 ## 6. NPM Packages:
 
-  * #TODO find and use 2 packages
+  * Bootstrap
+  * Font-Awesome
 
 ## 7. User Interface
 
-  * Pages are styled using custom CSS.
+  * Pages are styled using custom CSS and Bootstrap.
 
 ## 8. Deployment
 
@@ -93,4 +105,4 @@ URL | Description | Example
 
 ## 9. README
 
-  * #TODO complete documentation file.
+  * This is the readme. :)
