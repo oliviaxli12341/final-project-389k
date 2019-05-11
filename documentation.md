@@ -60,7 +60,8 @@ least popular post:         /least
     /user/:name/delete (deletes the user)
 
 ## 5. Modules:
-  #TODO create 2 modules
+  a. post_utils.js
+  b. user_utils.js
 
 ## 6. NPM Packages:
   a. Bootstrap
