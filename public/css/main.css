@@ -48,6 +48,19 @@ article p.tags{
   background-color: #3f3c3c;
   border-top: 2px solid #f5624d;
 }
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages li {
+  padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) {
+  background: #eee;
+}
 
 #nav li {
   float: left;

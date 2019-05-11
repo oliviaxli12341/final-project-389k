@@ -16,20 +16,34 @@
 
 
 <body>
+ 
 <ul id="nav">
     <li><a href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
     <li><a href="/create"><i class="fas fa-pen"></i>&nbsp;&nbsp;Create a Post</a></li>
+    <li><a href="/users"><i class="fas fa-user"></i>&nbsp;&nbsp;All Users</a></li>
     <li><a href="/random">Random Post!</a></li>
     <li><a href="/most">Most Popular Post</a></li>
     <li><a href="/least">Least Popular Post</a></li>
-    <li><a href="#"><i class="fas fa-users"></i>&nbsp;&nbsp;About Us</a></li>
+    <li><a href="/aboutUs"><i class="fas fa-users"></i>&nbsp;&nbsp;About Us</a></li>
 </ul>
 <div id="page">
   {{{body}}}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-  <script>
+  <script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  
 
+  <script>
+        var socket = io();
+        $('#box').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+        });
   </script>
+
   <div id="footer">
     <p>Created by Kemi Lin, Xiaoyu Li, and Matthew McGowan &mdash; 2019
   </div>

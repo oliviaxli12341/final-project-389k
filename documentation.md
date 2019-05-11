@@ -43,7 +43,7 @@ UserSchema:
 ```
 ## 2. Live Updates:
 
-  #TODO add live updates with web sockets
+  At the homepage, you can send any comments real time and interact with other users.
 
 ## 3. View Data:
 
