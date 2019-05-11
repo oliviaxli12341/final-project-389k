@@ -1,0 +1,22 @@
+<input id="search" type="text" placeholder="Search for something!">
+
+
+<div id="search_results"></div>
+
+<div id="all">
+{{#each data}}
+<article>
+  <img src="{{this.picture}}"/>
+  <h1>{{this.user}}</h1>
+  <p>{{this.description}}<p>
+
+</article>
+{{else}}
+<article>
+  <h1>There was no user data from the server.</h1>
+</article>
+{{/each}}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js">
+</script>
