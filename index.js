@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv').config();
 var Post = require('./models/Post');
 var User = require('./models/User');
+var postUtil = require('./post_utils');
+var userUtil = require('./user_utils');
 
 //Load Environment Variables
 if (dotenv.error) {
@@ -243,6 +245,24 @@ app.get('/least', function (req, res) {
     res.render('home', {data: result});
   })
   })
-
 })
+
+app.delete('/post/:id/delete', function (req,res) {
+  Post.find({id: parseInt(req.params.id)}, function (err, results) {
+   postUtil.iterateAndRemoveById(results);
+});
+});
+
+app.delete('/user/post/:name/delete', function (req, res) {
+  Post.find({user: req.params.name}, function (err, results) {
+    postUtil.iterateAndRemoveById(results)
+  });
+});
+
+app.delete('/user/:name/delete', function (req, res) {
+  User.find({user: req.params.name}, function (err, results) {
+    userUtil.iterateAndRemoveUser(results);
+  })
+})
+
 module.exports = app

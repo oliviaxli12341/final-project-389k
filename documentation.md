@@ -45,23 +45,29 @@ show a specific user:       /user/:name
 edit or create a user:      /user/:name/edit
 show all posts:             /api/posts
 show all users:             /api/users
+random post:                /random
+most popular post:          /most
+least popular post:         /least
 
   a. HTML pages are generated using handlebars
-  b. (2/5), we currently have a home page and a form submission page.
+  b. (5/5), we currently have a home page, a form submission page, a random post, a most popular, a least popular.
   c. #TODO add about page
 
 ## 4. API:
  a. #TODO add API endpoints
- b. #TODO add delete endpoints
+ b. /post/:id/delete (deletes a specific post according to id - the post number)
+    /user/post/:name/delete (deletes posts associated with a user, doesn't delete the user)
+    /user/:name/delete (deletes the user)
 
 ## 5. Modules:
   #TODO create 2 modules
 
 ## 6. NPM Packages:
-  #TODO find and use 2 packages
+  a. Bootstrap
+  b. Font-Awesome
 
 ## 7. User Interface
-  Pages are styled using css
+  Pages are styled using css and bootstrap
 
 ## 8. Deployment
   #TODO put website on heroku
