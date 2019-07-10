@@ -102,7 +102,3 @@ URL | Description | Example
   * The website was deployed to the internet using Heroku.
 
   https://final-project-389k.herokuapp.com/
-
-## 9. README
-
-  * This is the readme. :)

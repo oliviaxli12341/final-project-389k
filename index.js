@@ -245,6 +245,7 @@ app.get('/most', function (req, res) {
         item = i.id;
       }
     }
+
     Post.find({id: item}, function (err, result) {
       res.render('home', {data: result});
     })
@@ -269,8 +270,9 @@ app.get('/least', function (req, res) {
 
 app.delete('/post/:id/delete', function (req,res) {
   Post.find({id: parseInt(req.params.id)}, function (err, results) {
-    postUtil.iterateAndRemoveById(results);
-  });
+
+   postUtil.iterateAndRemoveById(results);
+});
 });
 
 app.delete('/user/post/:name/delete', function (req, res) {
@@ -279,14 +281,11 @@ app.delete('/user/post/:name/delete', function (req, res) {
   });
 });
 
-app.delete('/user/:name/delete', function (req, res) {
-  User.find({user: req.params.name}, function (err, results) {
-    userUtil.iterateAndRemoveUser(results);
-  })
-})
 app.get('/aboutUs', function(req,res) {
 
+
   res.render('aboutUs');
+
 
 });
 
