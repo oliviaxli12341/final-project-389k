@@ -8,12 +8,14 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv').config();
 var Post = require('./models/Post');
 var User = require('./models/User');
+var postUtil = require('./post_utils');
+var userUtil = require('./user_utils');
 
 
 //Load Environment Variables
-if (dotenv.error) {
+/*if (dotenv.error) {
   throw dotenv.error
-}
+}*/
 console.log("##dotenv loaded")
 console.log(dotenv.parsed);
 
@@ -39,18 +41,18 @@ app.set('view engine', 'handlebars');
 app.use('/public', express.static('public'));
 
 http.listen(process.env.PORT || 8080, function() {
-     console.log('Listening on port 8080!');
- });
+  console.log('Listening on port 8080!');
+});
 
- io.on('connection', function(socket) {
+io.on('connection', function(socket) {
   console.log('NEW connection.');
   socket.on('chat message', function(msg) {
-      console.log('msg');
-      io.emit('chat message', msg);
+    console.log('msg');
+    io.emit('chat message', msg);
   });
   socket.on('disconnect', function(){
-      console.log('Oops. A user disconnected.');
-});
+    console.log('Oops. A user disconnected.');
+  });
 });
 
 
@@ -184,26 +186,26 @@ app.get('/user/:name/edit',function(req,res){
 
 app.post("/user/:name/edit",function(req,res){
   console.log("test");
-    User.find({user:req.params.name}, function(err, users) {
-      if (err) throw err;
-      console.log(users[0]);
-      if (users[0] === undefined) {
-        users[0] = new User({
-          user: req.params.name,
-          description: req.body.desc,
-          picture: req.body.picture
-        });
-      } else {
-        users[0].description = req.body.desc;
-        users[0].picture = req.body.picture;
-      }
-      console.log(users[0]);
-      users[0].save(function(err) {
-      if (err) throw err;
-        //return res.send("Successfully edited user " + req.params.name);
-        res.redirect("/user/"+req.params.name);
+  User.find({user:req.params.name}, function(err, users) {
+    if (err) throw err;
+    console.log(users[0]);
+    if (users[0] === undefined) {
+      users[0] = new User({
+        user: req.params.name,
+        description: req.body.desc,
+        picture: req.body.picture
       });
+    } else {
+      users[0].description = req.body.desc;
+      users[0].picture = req.body.picture;
+    }
+    console.log(users[0]);
+    users[0].save(function(err) {
+      if (err) throw err;
+      //return res.send("Successfully edited user " + req.params.name);
+      res.redirect("/user/"+req.params.name);
     });
+  });
 });
 
 
@@ -226,10 +228,10 @@ app.get('/random', function (req,res) {
   Post.find({}, function (err, results) {
     count = results.length;
     var random_num = Math.floor(Math.random() * count - 1) + 1;
-  console.log(random_num);
-  Post.find({id:random_num}, function (err, result) {
-    res.render('home', {data: result});
-  });
+    console.log(random_num);
+    Post.find({id:random_num}, function (err, result) {
+      res.render('home', {data: result});
+    });
   });
 });
 
@@ -243,10 +245,10 @@ app.get('/most', function (req, res) {
         item = i.id;
       }
     }
-  Post.find({id: item}, function (err, result) {
-    res.render('home', {data: result});
-  })
-    
+    Post.find({id: item}, function (err, result) {
+      res.render('home', {data: result});
+    })
+
   })
 })
 
@@ -260,15 +262,32 @@ app.get('/least', function (req, res) {
       }
     }}
     Post.find({id: item}, function (err, result) {
-    res.render('home', {data: result});
+      res.render('home', {data: result});
+    })
   })
-  })
+})
 
+app.delete('/post/:id/delete', function (req,res) {
+  Post.find({id: parseInt(req.params.id)}, function (err, results) {
+    postUtil.iterateAndRemoveById(results);
+  });
+});
+
+app.delete('/user/post/:name/delete', function (req, res) {
+  Post.find({user: req.params.name}, function (err, results) {
+    postUtil.iterateAndRemoveById(results)
+  });
+});
+
+app.delete('/user/:name/delete', function (req, res) {
+  User.find({user: req.params.name}, function (err, results) {
+    userUtil.iterateAndRemoveUser(results);
+  })
 })
 app.get('/aboutUs', function(req,res) {
-  
-    res.render('aboutUs');
-  
+
+  res.render('aboutUs');
+
 });
 
 module.exports = app
